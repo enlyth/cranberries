@@ -1,10 +1,10 @@
-import express from "express";
+import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
 import typeDefs from "./graphql/typedefs";
 import resolvers from "./graphql/resolvers";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import { initializeDatabase } from "./db/db";
-import cors from "cors";
+import * as cors from "cors";
 
 dotenv.config();
 

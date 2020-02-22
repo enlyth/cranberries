@@ -1,5 +1,6 @@
-import mongoose, { Schema, Document } from "mongoose";
-import timestamp from "mongoose-timestamp";
+import * as mongoose from "mongoose";
+import * as timestamp from "mongoose-timestamp";
+import { Schema, Document } from "mongoose";
 import { IZombie } from "../../types/zombie";
 
 interface IZombieDocument extends Document, IZombie {}

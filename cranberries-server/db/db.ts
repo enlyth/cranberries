@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import * as mongoose from "mongoose";
+import * as dotenv from "dotenv";
+import * as casual from "casual";
 import { initialLocations } from "./seed/initialLocations";
 import { Location } from "./models/Location";
 import { Zombie } from "./models/Zombie";
 import { selectRandom } from "../util/random";
-import casual from "casual";
 import { ZombieType } from "../types/zombie";
 
 dotenv.config();
@@ -36,6 +36,7 @@ async function initializeLocations() {
 async function initializeZombies() {
   const locations = await Location.find({}).exec();
   const zombieCount = await Zombie.countDocuments({}).exec();
+  console.log("Zombie count: ", zombieCount);
   const MIN_ZOMBIES = Number(process.env.MIN_ZOMBIES);
   const APPEARANCE_VARIATIONS = Number(process.env.APPEARANCE_VARIATIONS);
 
@@ -45,7 +46,7 @@ async function initializeZombies() {
         zombieCount} zombies.`
     );
     const newZombies = [];
-    for (let i = 0; i < MIN_ZOMBIES; ++i) {
+    for (let i = 0; i < MIN_ZOMBIES - zombieCount; ++i) {
       newZombies.push({
         name: casual.first_name,
         location: selectRandom(locations),

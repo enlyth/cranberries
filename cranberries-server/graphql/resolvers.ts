@@ -2,8 +2,8 @@ import { Zombie } from "../db/models/Zombie";
 import { Location } from "../db/models/Location";
 import { ZombieType } from "../types/zombie";
 import { selectRandom } from "../util/random";
-import casual from "casual";
-import dotenv from "dotenv";
+import * as casual from "casual";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
