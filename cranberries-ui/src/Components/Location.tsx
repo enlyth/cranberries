@@ -90,10 +90,6 @@ export const Location: React.FC<IProps> = props => {
 
   const toggleSelected = (zombie: IZombie) => {
     if (selected.find(x => x.id === zombie.id)) {
-      console.log(
-        "selected",
-        selected.map(x => x.id)
-      );
       setSelected(selected.filter(x => x.id !== zombie.id));
     } else {
       setSelected([...selected, zombie]);

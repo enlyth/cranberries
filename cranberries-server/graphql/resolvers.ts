@@ -1,32 +1,25 @@
 import { Zombie } from "../db/models/Zombie";
 import { Location } from "../db/models/Location";
-import { ZombieType } from "../types/zombie";
+import { ZombieType, IZombie } from "../types/zombie";
 import { selectRandom } from "../util/random";
 import * as casual from "casual";
 import * as dotenv from "dotenv";
+import { ILocation } from "../types/location";
 
 dotenv.config();
 
 const resolvers = {
   Query: {
-    zombie: async (_, { id }) => {
-      return Zombie.findById({ id });
-    },
-    zombies: async () => {
-      return Zombie.find({});
-    },
-    location: async (_, { id }) => {
-      return Location.findById({ id });
-    },
-    locations: async () => {
-      return Location.find({});
-    }
+    zombie: (_, { id }) => Zombie.findById({ id }),
+    zombies: () => Zombie.find({}),
+    location: (_, { id }) => Location.findById({ id }),
+    locations: () => Location.find({})
   },
   Zombie: {
-    location: zombie => Location.findOne({ _id: zombie.location })
+    location: (zombie: IZombie) => Location.findOne({ _id: zombie.location })
   },
   Location: {
-    zombies: location => Zombie.find({ location })
+    zombies: (location: ILocation) => Zombie.find({ location })
   },
   Mutation: {
     moveZombiesToLocation: async (_, { zombieIds, locationName }) => {
