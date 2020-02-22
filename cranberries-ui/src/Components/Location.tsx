@@ -40,7 +40,6 @@ const ZombieList = styled.div`
   flex-wrap: wrap;
   border-radius: 0px 0px 4px 4px;
   align-items: center;
-
 `;
 
 const LocationImage = styled.img`
@@ -55,6 +54,13 @@ const Actions = styled.div`
   justify-content: flex-end;
   border-top: 1px solid #1f1f1f;
   padding: 16px;
+`;
+
+const LocationLabel = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 interface IProps {
@@ -105,8 +111,12 @@ export const Location: React.FC<IProps> = props => {
   return (
     <Container id={location.name}>
       <Title>
-        <h2>{location.name}</h2>
-
+        <LocationLabel>
+          <h2>{location.name}</h2>
+          <span>
+            {location.zombies.length ? location.zombies.length : "No"} Zombies
+          </span>
+        </LocationLabel>
         <LocationImage src={`/${location.image}`} alt="hospital" />
       </Title>
       <Actions>
@@ -158,7 +168,6 @@ export const Location: React.FC<IProps> = props => {
           Deselect All {selected.length ? `(${selected.length})` : ""}
         </Button>
       </Actions>
-
     </Container>
   );
 };
